@@ -6,7 +6,7 @@
 
     <!--
     <services>
-        <service id="blog.example" class="MSBios\BlogBundle\Example">
+        <service id="model.example" class="MSBios\ModelBundle\Example">
             <argument type="service" id="service_id" />
             <argument>plain_value</argument>
             <argument>%parameter_name%</argument>

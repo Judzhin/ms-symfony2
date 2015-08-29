@@ -1,4 +1,5 @@
-ms_bios_blog:
-    resource: "@MSBiosBlogBundle/Controller/"
+blog:
+    resource: "@BlogBundle/Controller/"
     type:     annotation
     prefix:   /
+
