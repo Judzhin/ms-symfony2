@@ -2,14 +2,13 @@
 
 namespace MSBios\ModelBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Author
  *
- * @ORM\Table(name="tut_t_authors")
+ * @ORM\Table()
  * @ORM\Entity
  */
 class Author extends Timestampable
@@ -32,8 +31,6 @@ class Author extends Timestampable
     private $name;
 
     /**
-     * @var ArrayCollection
-     *
      * @ORM\OneToMany(targetEntity="Post", mappedBy="author", cascade={"remove"})
      */
     private $posts;
@@ -71,44 +68,5 @@ class Author extends Timestampable
     {
         return $this->name;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->posts = new ArrayCollection;
-    }
-
-    /**
-     * Add post
-     *
-     * @param Post $post
-     * @return Author
-     */
-    public function addPost(Post $post)
-    {
-        $this->posts[] = $post;
-
-        return $this;
-    }
-
-    /**
-     * Remove post
-     *
-     * @param Post $post
-     */
-    public function removePost(Post $post)
-    {
-        $this->posts->removeElement($post);
-    }
-
-    /**
-     * Get posts
-     *
-     * @return ArrayCollection
-     */
-    public function getPosts()
-    {
-        return $this->posts;
-    }
 }
+

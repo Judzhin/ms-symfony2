@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Post
  *
- * @ORM\Table(name="tut_t_posts")
+ * @ORM\Table()
  * @ORM\Entity
  */
 class Post extends Timestampable
@@ -102,28 +102,5 @@ class Post extends Timestampable
     {
         return $this->description;
     }
-
-    /**
-     * Set author
-     *
-     * @param \MSBios\ModelBundle\Entity\Author $author
-     *
-     * @return Post
-     */
-    public function setAuthor(\MSBios\ModelBundle\Entity\Author $author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return \MSBios\ModelBundle\Entity\Author
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
 }
+

@@ -3,11 +3,14 @@
 namespace MSBios\ModelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraint as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Timestampable
+ *
  * @package MSBios\ModelBundle\Entity
+ * @ORM\MappedSuperclass()
+ * @ORM\HasLifecycleCallbacks()
  */
 abstract class Timestampable
 {
@@ -19,7 +22,10 @@ abstract class Timestampable
      */
     private $createdAt;
 
-    public function __construct()
+    /**
+     * @ORM\PreFlush()
+     */
+    public function doStuffOnPreFlush()
     {
         $this->createdAt = new \DateTime;
     }
