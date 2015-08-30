@@ -10,3 +10,4 @@ composer.lock
 vendor/*
 UPGRADE*
 app/cache/*
+app/logs/report

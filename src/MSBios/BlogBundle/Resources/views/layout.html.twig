@@ -1,0 +1,29 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+    <link ref="stylesheet" type="text/css" href="{{ asset('boundles/blog/css/main.css') }}">
+{% endblock %}
+
+{% block body %}
+    <header>
+        <p>Symfony 2 blog</p>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#">{{ 'home' | trans }}</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    {% block sidebar %}{% endblock %}
+
+    <section>
+        {% block section %}{% endblock %}
+    </section>
+
+    <footer>
+        <p>&copy; {{ 'now' | date('Y') }} Symfony 2 blog</p>
+    </footer>
+
+{% endblock %}

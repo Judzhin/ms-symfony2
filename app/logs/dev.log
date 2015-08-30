@@ -768,3 +768,5 @@
 [2015-08-30 16:06:34] event.DEBUG: Notified event "console.terminate" to listener "Symfony\Bundle\SwiftmailerBundle\EventListener\EmailSenderListener::onTerminate". [] []
 [2015-08-30 16:06:34] event.DEBUG: Notified event "console.terminate" to listener "Symfony\Bridge\Monolog\Handler\ConsoleHandler::onTerminate". [] []
 [2015-08-30 16:06:34] event.DEBUG: Notified event "console.terminate" to listener "Symfony\Bridge\Monolog\Handler\ConsoleHandler::onTerminate". [] []
+[2015-08-30 16:41:46] request.INFO: Matched route "msbios_blog_post_index" (parameters: "_controller": "MSBios\BlogBundle\Controller\PostController::indexAction", "_route": "msbios_blog_post_index") [] []
+[2015-08-30 16:41:47] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "eadb5b", "_route": "_wdt") [] []
