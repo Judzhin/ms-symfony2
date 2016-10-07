@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
 namespace MSBios\ModelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -31,11 +34,8 @@ abstract class Timestampable
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Author
+     * @param $createdAt
+     * @return $this
      */
     public function setCreatedAt($createdAt)
     {
@@ -45,8 +45,6 @@ abstract class Timestampable
     }
 
     /**
-     * Get createdAt
-     *
      * @return \DateTime
      */
     public function getCreatedAt()
@@ -54,4 +52,3 @@ abstract class Timestampable
         return $this->createdAt;
     }
 }
-

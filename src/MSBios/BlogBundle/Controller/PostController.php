@@ -18,7 +18,9 @@ class PostController extends Controller
      */
     public function indexAction()
     {
-        return [];
+        return [
+            'some' => true
+        ];
     }
 
 }
