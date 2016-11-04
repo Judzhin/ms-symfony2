@@ -995,3 +995,5 @@
 [2016-10-19 15:22:19] event.DEBUG: Notified event "console.terminate" to listener "Symfony\Bundle\SwiftmailerBundle\EventListener\EmailSenderListener::onTerminate". [] []
 [2016-10-19 15:22:19] event.DEBUG: Notified event "console.terminate" to listener "Symfony\Bridge\Monolog\Handler\ConsoleHandler::onTerminate". [] []
 [2016-10-19 15:22:19] event.DEBUG: Notified event "console.terminate" to listener "Symfony\Bridge\Monolog\Handler\ConsoleHandler::onTerminate". [] []
+[2016-11-04 17:43:55] request.INFO: Matched route "msbios_blog_post_index". {"route_parameters":{"_controller":"MSBios\\BlogBundle\\Controller\\PostController::indexAction","_route":"msbios_blog_post_index"},"request_uri":"http://symfony2.tut/"} []
+[2016-11-04 17:43:55] request.INFO: Matched route "_wdt". {"route_parameters":{"_controller":"web_profiler.controller.profiler:toolbarAction","token":"543971","_route":"_wdt"},"request_uri":"http://symfony2.tut/_wdt/543971"} []

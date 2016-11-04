@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Timestampable
- *
  * @package MSBios\ModelBundle\Entity
  * @ORM\MappedSuperclass()
  * @ORM\HasLifecycleCallbacks()

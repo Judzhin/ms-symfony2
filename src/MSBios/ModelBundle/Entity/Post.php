@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
 namespace MSBios\ModelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;

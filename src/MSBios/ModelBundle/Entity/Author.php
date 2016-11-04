@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
 namespace MSBios\ModelBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -7,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Author
- *
+ * Class Author
+ * @package MSBios\ModelBundle\Entity
  * @ORM\Table(name="tut_t_authors")
  * @ORM\Entity
  */
