@@ -30,6 +30,20 @@ class PostRepository extends EntityRepository
     }
 
     /**
+     * Find the first post
+     * @return mixed
+     */
+    public function findFirst()
+    {
+        /** @var QueryBuilder $queryBuilder */
+        $queryBuilder = $this->getQueryBuilder()
+            ->orderBy('p.id', 'ASC')
+            ->setMaxResults(1);
+
+        return $queryBuilder->getQuery()->getSingleResult();
+    }
+
+    /**
      * @return QueryBuilder
      */
     private function getQueryBuilder()

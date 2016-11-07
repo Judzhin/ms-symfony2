@@ -74,8 +74,9 @@ class Author extends Timestampable
     {
         return $this->name;
     }
+
     /**
-     * Constructor
+     * Author constructor.
      */
     public function __construct()
     {

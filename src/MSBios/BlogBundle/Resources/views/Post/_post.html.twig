@@ -1,10 +1,11 @@
-
 <div class="blog-post">
-    <h2 class="blog-post-title">{{ post.title }}</h2>
+    <h2 class="blog-post-title">
+        <a href="{{ path('msbios_blog_post_show', {slug: post.slug}) }}">{{ post.title }}</a>
+    </h2>
     <p class="blog-post-meta">
         <time datetime="{{ post.createdAt | date('c') }}">{{ post.createdAt | date }}</time>
         {{ 'by' | trans }} <a href="#">{{ post.author.name }}</a>
     </p>
 
-    <p>{{ post.description | truncate(400) }} &#8212 <a href="#">{{ 'read.more' | trans }} &raquo;</a></p>
+    <p>{{ post.description | truncate(400) }} &#8212 <a href="{{ path('msbios_blog_post_show', {slug: post.slug}) }}">{{ 'read.more' | trans }} &raquo;</a></p>
 </div><!-- /.blog-post -->

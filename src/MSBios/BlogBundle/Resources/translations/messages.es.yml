@@ -2,7 +2,9 @@ home: Inicio
 
 by: por
 read.more: Lear mas
+author: Autor
 
 post:
   plural: Posts
+  latest: Ultimos posts
   on: Publication on

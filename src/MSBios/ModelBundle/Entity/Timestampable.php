@@ -6,6 +6,7 @@
 namespace MSBios\ModelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -19,18 +20,28 @@ abstract class Timestampable
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime")
      * @Assert\NotBlank
      */
     private $createdAt;
 
     /**
-     * @ORM\PreFlush()
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="updated_at", type="datetime")
+     * @Assert\NotBlank
      */
-    public function doStuffOnPreFlush()
-    {
-        $this->createdAt = new \DateTime;
-    }
+    private $updatedAt;
+
+    // /**
+    //  * @ORM\PreFlush()
+    //  */
+    // public function doStuffOnPreFlush()
+    // {
+    //     $this->createdAt = new \DateTime;
+    // }
 
     /**
      * @param $createdAt
@@ -49,5 +60,24 @@ abstract class Timestampable
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @param $updatedAt
+     * @return $this
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }
