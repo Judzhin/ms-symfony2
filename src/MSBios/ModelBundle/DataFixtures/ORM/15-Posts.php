@@ -1,4 +1,8 @@
 <?php
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
 namespace MSBios\ModelBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;

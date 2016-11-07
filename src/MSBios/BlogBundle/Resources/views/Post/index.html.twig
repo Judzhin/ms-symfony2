@@ -1,7 +1,15 @@
-{% extends "::base.html.twig" %}
+{% extends "@Blog/layout.html.twig" %}
 
-{% block title %}BlogBundle:Post:index{% endblock %}
+{% block title %}{{ 'post.plural' | trans }}{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Post:index page</h1>
+{% block sidebar %}
+
+{% endblock %}
+
+{% block section %}
+
+    {% for post in posts %}
+        {{ include('BlogBundle:Post:_post.html.twig', {post:post}) }}
+    {% endfor %}
+
 {% endblock %}
