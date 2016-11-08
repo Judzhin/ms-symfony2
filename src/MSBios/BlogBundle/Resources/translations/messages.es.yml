@@ -1,4 +1,15 @@
 home: Inicio
 
+<<<<<<< HEAD
 post:
   plural: Posts
+=======
+by: por
+read.more: Lear mas
+author: Autor
+
+post:
+  plural: Posts
+  latest: Ultimos posts
+  on: Publication on
+>>>>>>> 46e484be86cbd4fb1f47cf78f48a16192611bbb6

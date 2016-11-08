@@ -1,8 +1,18 @@
 home: Home
 
 by: by
+<<<<<<< HEAD
 read.more: read.more
 
 post:
   plural: Posts
   on: on
+=======
+read.more: Read more
+author: Author
+
+post:
+  plural: Posts
+  latest: Latest posts
+  on: Postend on
+>>>>>>> 46e484be86cbd4fb1f47cf78f48a16192611bbb6

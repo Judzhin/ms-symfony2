@@ -31,7 +31,11 @@ header li {
 }
 
 header li a {
+<<<<<<< HEAD
     color: #e7e7e7;
+=======
+    color: white;
+>>>>>>> 46e484be86cbd4fb1f47cf78f48a16192611bbb6
 }
 
 section {
@@ -39,6 +43,7 @@ section {
     width: 65%;
 }
 
+<<<<<<< HEAD
 article header {
     background-color: transparent;
     padding-left: 0;
@@ -70,16 +75,32 @@ footer {
     height: 80px;
     width: 100%;
     border-top: 1px solix #b5b5b5;
+=======
+footer {
+    position: absolute;
+    left: 0; bottom: 0; height: 80px;
+    width: 100%;
+    border-top: 1px solid #b5b5b5;
+>>>>>>> 46e484be86cbd4fb1f47cf78f48a16192611bbb6
     padding: 10px;
     font-size: 13px;
 }
 
 a {
+<<<<<<< HEAD
     color: #4f6e9f;
     text-decoration: none;
 }
 
 a:hover, a:active {
+=======
+    color: #476e9f;
+    text-decoration: none;
+}
+
+a:hover,
+a:active {
+>>>>>>> 46e484be86cbd4fb1f47cf78f48a16192611bbb6
     color: #4f6e9f;
     text-decoration: underline;
 }

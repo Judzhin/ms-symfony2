@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @access public
  * @author Judzhin Miles <info[woof-woof]msbios.com>
@@ -17,7 +16,6 @@ class AppKernel extends Kernel
      */
     public function registerBundles()
     {
-
         date_default_timezone_set('Europe/Kiev');
 
         $bundles = [
@@ -28,11 +26,12 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new MSBios\BlogBundle\BlogBundle(),
             new MSBios\ModelBundle\ModelBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle,
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {
@@ -50,6 +49,6 @@ class AppKernel extends Kernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
+        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
 }
