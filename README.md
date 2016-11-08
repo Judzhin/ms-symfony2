@@ -1,2 +1,0 @@
-Symfony Standard Edition Tuts
-=============================

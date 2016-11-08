@@ -10,6 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class PostControllerTest extends WebTestCase
 {
+    /**
+     * @return void
+     */
     public function testIndex()
     {
         $client = static::createClient();
@@ -17,6 +20,6 @@ class PostControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertTrue($client->getResponse()->isSuccessful(), 'The response was not successful');
+        $this->assertCount(9, $crawler->filter('h2'), 'There should be 3 displayed posts');
     }
-
 }

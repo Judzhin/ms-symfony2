@@ -110,7 +110,7 @@ class Post extends Timestampable
      *
      * @return Post
      */
-    public function setAuthor(\MSBios\ModelBundle\Entity\Author $author)
+    public function setAuthor(Author $author)
     {
         $this->author = $author;
 

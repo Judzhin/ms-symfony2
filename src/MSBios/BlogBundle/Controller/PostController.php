@@ -2,6 +2,7 @@
 
 namespace MSBios\BlogBundle\Controller;
 
+use Doctrine\Common\Util\Debug;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -15,10 +16,16 @@ class PostController extends Controller
     /**
      * @Route("/")
      * @Template()
+     * @return array
      */
     public function indexAction()
     {
-        return [];
+        /** @var array $posts */
+        $posts = $this->getDoctrine()->getRepository('ModelBundle:Post')->findAll();
+
+        return [
+            'posts' => $posts
+        ];
     }
 
 }
