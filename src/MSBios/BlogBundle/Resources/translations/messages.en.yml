@@ -8,3 +8,8 @@ post:
   plural: Posts
   latest: Latest posts
   on: Postend on
+  by: Post by
+  by.author: Post by %name%
+
+author:
+  empty.posts: This author did not write any post yet.

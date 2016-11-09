@@ -1,0 +1,25 @@
+{% extends "@Blog/layout.html.twig" %}
+
+{% block title %}{{ 'post.by.author' | trans({'%name%': author.name}) }}{% endblock %}
+
+{% block section %}
+
+    {% for post in posts %}
+        {{ include('BlogBundle:Post:_post.html.twig', {post:post}) }}
+    {% else %}
+        <p>{{ 'author.empty.posts' | trans }}</p>
+    {% endfor %}
+
+
+{% endblock %}
+
+{% block sidebar %}
+
+    <div class="blog-post">
+        <h2 class="blog-post-title">{{ 'post.by' | trans }}</h2>
+        <p class="blog-post-meta">
+            {{ author.name }}
+        </p>
+    </div><!-- /.blog-post -->
+
+{% endblock %}

@@ -5,30 +5,16 @@
  */
 namespace MSBios\ModelBundle\Repository;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * Class PostRepository
+ * Class AuthorRepository
  * @package MSBios\ModelBundle\Repository
  */
-class PostRepository extends EntityRepository
+class AuthorRepository extends EntityRepository
 {
-    /**
-     * @param $maxResults
-     * @return array
-     */
-    public function findLatest($maxResults)
-    {
-        /** @var QueryBuilder $queryBuilder */
-        $queryBuilder = $this->getQueryBuilder()
-            ->orderBy('p.createdAt', 'DESC')
-            ->setMaxResults($maxResults);
-
-        return $queryBuilder->getQuery()
-            ->getResult();
-    }
-
     /**
      * Find the first post
      * @return mixed
@@ -37,7 +23,7 @@ class PostRepository extends EntityRepository
     {
         /** @var QueryBuilder $queryBuilder */
         $queryBuilder = $this->getQueryBuilder()
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('a.id', 'ASC')
             ->setMaxResults(1);
 
         return $queryBuilder->getQuery()
@@ -49,6 +35,6 @@ class PostRepository extends EntityRepository
      */
     private function getQueryBuilder()
     {
-        return $this->createQueryBuilder('p');
+        return $this->createQueryBuilder('a');
     }
 }

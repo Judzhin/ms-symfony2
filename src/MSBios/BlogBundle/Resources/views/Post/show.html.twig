@@ -9,7 +9,8 @@
         <p class="blog-post-meta">
             {{ 'post.on' | trans }}
             <time datetime="{{ post.createdAt | date('c') }}">{{ post.createdAt | date }}</time>
-            {{ 'by' | trans }} <a href="#">{{ post.author.name }}</a>
+            {{ 'by' | trans }}
+            <a href="{{ path('msbios_blog_author_show', {slug: post.author.slug}) }}">{{ post.author.name }}</a>
         </p>
 
         <p>{{ post.description }}</p>
@@ -22,7 +23,8 @@
         <div class="sidebar-module sidebar-module-inset">
             <h4>{{ 'author' | trans }}</h4>
             <p>
-                <a href="#" title="{{ 'post.by.author' | trans({'%name%': post.author.name}) }}">
+                <a href="{{ path('msbios_blog_author_show', {slug: post.author.slug}) }}"
+                   title="{{ 'post.by.author' | trans({'%name%': post.author.name}) }}">
                     {{ post.author.name }}
                 </a>
             </p>

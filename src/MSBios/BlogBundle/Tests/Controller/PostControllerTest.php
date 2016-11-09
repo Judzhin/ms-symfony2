@@ -32,7 +32,8 @@ class PostControllerTest extends WebTestCase
         $client = static::createClient();
 
         /** @var Post $post */
-        $post = $client->getContainer('doctrine')
+        $post = $client->getContainer()
+            ->get('doctrine')
             ->getManager()
             ->getRepository(Post::class)
             ->findFirst();
