@@ -7,7 +7,9 @@ namespace MSBios\BlogBundle\Tests\Controller;
 
 use Doctrine\ORM\EntityManager;
 use MSBios\ModelBundle\Entity\Post;
+use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class PostControllerTest
@@ -39,7 +41,7 @@ class PostControllerTest extends WebTestCase
 
     public function testShow()
     {
-        /** @var  $client */
+        /** @var Clie $client */
         $client = static::createClient();
 
         /** @var Post $post */
@@ -53,6 +55,52 @@ class PostControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/'.$post->getSlug());
         $this->assertTrue($client->getResponse()->isSuccessful(), 'The response was not successful');
         $this->assertEquals($post->getTitle(), $crawler->filter('.blog-post-title')->text(), 'Invalid post title');
-        $this->assertGreaterThanOrEqual(count($post->getComments()), $crawler->filter('.media-body')->count(), 'There should be at least');
+        $this->assertGreaterThanOrEqual(
+            count($post->getComments()),
+            $crawler->filter('.media-body')->count(),
+            'There should be at least'
+        );
+    }
+
+    public function testCreateComment()
+    {
+        /** @var Client $client */
+        $client = static::createClient();
+
+        /** @var Post $post */
+        $post = $client->getContainer()
+            ->get('doctrine')
+            ->getRepository(Post::class)
+            ->findFirst();
+
+        /** @var string $url */
+        $url = "/{$post->getSlug()}";
+
+        /** @var Crawler $crawler */
+        $crawler = $client->request('GET', $url);
+
+        $buttonCrawlerNode = $crawler->selectButton('Send');
+
+        $form = $buttonCrawlerNode->form(
+            [
+                'blog_modelbundle_comment[authorName]' => 'A hunble commenter',
+                'blog_modelbundle_comment[message]' => "Hi! I`m commenting about Symfony2!",
+            ]
+        );
+
+        $client->submit($form);
+
+        $this->assertTrue(
+            $client->getResponse()->isRedirect($url, 'There was no redirect after submitting the')
+        );
+
+        /** @var Crawler $crawler */
+        $crawler = $client->followRedirect();
+
+        $this->assertCount(
+            1,
+            $crawler->filter('html:contains("Your comment was submitted successfully")'),
+            'There was not any confirmation message'
+        );
     }
 }

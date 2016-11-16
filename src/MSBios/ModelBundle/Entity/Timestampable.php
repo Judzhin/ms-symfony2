@@ -35,14 +35,6 @@ abstract class Timestampable
      */
     private $updatedAt;
 
-    // /**
-    //  * @ORM\PreFlush()
-    //  */
-    // public function doStuffOnPreFlush()
-    // {
-    //     $this->createdAt = new \DateTime;
-    // }
-
     /**
      * @param $createdAt
      * @return $this
