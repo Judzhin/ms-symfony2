@@ -1,5 +1,9 @@
 home: Inicio
 
+<<<<<<< HEAD
+post:
+  plural: Posts
+=======
 by: por
 read.more: Lear mas
 
@@ -7,6 +11,7 @@ post:
   plural: Posts
   latest: Ultimos posts
   on: Publication on
+<<<<<<< HEAD
   by: Posts por
   by.author: Posts por %name%
   comments: '{0} Sin comentarios|{1} %count% comentario|]1,Inf] %count% comentarios'
@@ -17,3 +22,6 @@ comment:
 author:
   title:
   empty.posts: Este autor no ha escrito ningun post todavia.
+=======
+>>>>>>> 46e484be86cbd4fb1f47cf78f48a16192611bbb6
+>>>>>>> 4939439057aee307f0bec7226ed0a84fdc1fab00

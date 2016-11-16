@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+{% extends "BlogBundle::layout.html.twig" %}
+
+{% block title %}{{ 'post.plural' | trans }}{% endblock %}
+
+{% block section %}
+    {% for post in posts %}
+        {{ include('BlogBundle:Post:_post.html.twig', { post: post}) }}
+    {% endfor %}
+=======
 {% extends "@Blog/layout.html.twig" %}
 
 {% block title %}{{ 'post.plural' | trans }}{% endblock %}
@@ -15,6 +25,7 @@
         </ul>
     </nav>
 
+>>>>>>> 46e484be86cbd4fb1f47cf78f48a16192611bbb6
 {% endblock %}
 
 {% block sidebar %}
