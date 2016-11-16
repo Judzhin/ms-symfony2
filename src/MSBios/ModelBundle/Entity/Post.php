@@ -6,6 +6,7 @@
  */
 namespace MSBios\ModelBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -57,6 +58,11 @@ class Post extends Timestampable
      */
     private $author;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="MSBios\ModelBundle\Entity\Comment", mappedBy="post", cascade={"remove"})
+     */
+    private $comments;
     /**
      * Get id
      *
@@ -139,13 +145,12 @@ class Post extends Timestampable
     }
 
     /**
-     * Set author
+     * Set Author
      *
-     * @param \MSBios\ModelBundle\Entity\Author $author
-     *
-     * @return Post
+     * @param Author $author
+     * @return $this
      */
-    public function setAuthor(\MSBios\ModelBundle\Entity\Author $author)
+    public function setAuthor(Author $author)
     {
         $this->author = $author;
 
@@ -155,10 +160,50 @@ class Post extends Timestampable
     /**
      * Get author
      *
-     * @return \MSBios\ModelBundle\Entity\Author
+     * @return mixed
      */
     public function getAuthor()
     {
         return $this->author;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param Comment $comments
+     * @return $this
+     */
+    public function addComment(Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param Comment $comments
+     */
+    public function removeComment(Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return ArrayCollection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

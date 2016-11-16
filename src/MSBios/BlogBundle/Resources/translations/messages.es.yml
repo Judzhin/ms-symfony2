@@ -2,7 +2,6 @@ home: Inicio
 
 by: por
 read.more: Lear mas
-author: Autor
 
 post:
   plural: Posts
@@ -10,6 +9,11 @@ post:
   on: Publication on
   by: Posts por
   by.author: Posts por %name%
+  comments: '{0} Sin comentarios|{1} %count% comentario|]1,Inf] %count% comentarios'
+
+comment:
+  plural: Comentarios
 
 author:
+  title:
   empty.posts: Este autor no ha escrito ningun post todavia.

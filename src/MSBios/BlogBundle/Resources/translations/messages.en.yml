@@ -2,14 +2,18 @@ home: Home
 
 by: by
 read.more: Read more
-author: Author
 
 post:
   plural: Posts
   latest: Latest posts
-  on: Postend on
+  on: Posted on
   by: Post by
   by.author: Post by %name%
+  comments: '{0} No comments|{1} %count% comment|]1,Inf] %count% comments'
+
+comment:
+  plural: Comments
 
 author:
+  title: Author
   empty.posts: This author did not write any post yet.

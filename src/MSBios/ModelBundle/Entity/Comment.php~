@@ -1,0 +1,107 @@
+<?php
+
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
+namespace MSBios\ModelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Class Comment
+ * @package MSBios\ModelBundle\Entity
+ * @ORM\Table(name="tut_t_comments")
+ * @ORM\Entity
+ */
+class Comment extends Timestampable
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="authorName", type="string", length=100)
+     * @Assert\NotBlank
+     */
+    private $authorName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="message", type="text")
+     * @Assert\NotBlank
+     */
+    private $message;
+
+    /**
+     * @var Post
+     * @ORM\ManyToOne(targetEntity="MSBios\ModelBundle\Entity\Post", inversedBy="comments")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id", nullable=false)
+     * @Assert\NotBlank
+     */
+    private $post;
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set authorName
+     *
+     * @param string $authorName
+     * @return Comment
+     */
+    public function setAuthorName($authorName)
+    {
+        $this->authorName = $authorName;
+
+        return $this;
+    }
+
+    /**
+     * Get authorName
+     *
+     * @return string
+     */
+    public function getAuthorName()
+    {
+        return $this->authorName;
+    }
+
+    /**
+     * Set message
+     *
+     * @param string $message
+     * @return Comment
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * Get message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+}

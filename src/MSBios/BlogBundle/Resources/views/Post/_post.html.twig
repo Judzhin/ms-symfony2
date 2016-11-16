@@ -4,8 +4,16 @@
     </h2>
     <p class="blog-post-meta">
         <time datetime="{{ post.createdAt | date('c') }}">{{ post.createdAt | date }}</time>
-        {{ 'by' | trans }} <a href="#">{{ post.author.name }}</a>
+        {{ 'by' | trans }} <a href="{{ path('msbios_blog_author_show', {slug: post.author.slug}) }}">
+            {{ post.author.name }}
+        </a>
+        - <a href="{{ path("msbios_blog_post_show", {slug: post.slug}) }}#comments">
+            {% set count = post.comments | length %}
+            {{ 'post.comments' | transchoice(count) }}
+        </a>
     </p>
 
-    <p>{{ post.description | truncate(400) }} &#8212 <a href="{{ path('msbios_blog_post_show', {slug: post.slug}) }}">{{ 'read.more' | trans }} &raquo;</a></p>
+    <p>{{ post.description | truncate(400) }} &#8212
+        <a href="{{ path('msbios_blog_post_show', {slug: post.slug}) }}">{{ 'read.more' | trans }} &raquo;</a>
+    </p>
 </div><!-- /.blog-post -->

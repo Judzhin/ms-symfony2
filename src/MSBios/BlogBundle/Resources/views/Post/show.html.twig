@@ -2,6 +2,20 @@
 
 {% block title %}{{ 'post.plural' | trans }}{% endblock %}
 
+{% block sidebar %}
+    <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        <div class="sidebar-module sidebar-module-inset">
+            <h4>{{ 'author.title' | trans }}</h4>
+            <p>
+                <a href="{{ path('msbios_blog_author_show', {slug: post.author.slug}) }}"
+                   title="{{ 'post.by.author' | trans({'%name%': post.author.name}) }}">
+                    {{ post.author.name }}
+                </a>
+            </p>
+        </div>
+    </div><!-- /.blog-sidebar -->
+{% endblock %}
+
 {% block section %}
 
     <div class="blog-post">
@@ -16,18 +30,12 @@
         <p>{{ post.description }}</p>
     </div><!-- /.blog-post -->
 
-{% endblock %}
+    <a id="comments"></a>
+    <h3>{{ 'comment.plural' | trans }}</h3>
 
-{% block sidebar %}
-    <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-        <div class="sidebar-module sidebar-module-inset">
-            <h4>{{ 'author' | trans }}</h4>
-            <p>
-                <a href="{{ path('msbios_blog_author_show', {slug: post.author.slug}) }}"
-                   title="{{ 'post.by.author' | trans({'%name%': post.author.name}) }}">
-                    {{ post.author.name }}
-                </a>
-            </p>
-        </div>
-    </div><!-- /.blog-sidebar -->
+    <div style="margin-bottom: 60px;">
+        {% for comment in post.comments %}
+            {{ include('@Blog/Post/_comment.html.twig', {comment: comment}) }}
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -1,6 +1,8 @@
 {% extends "@Blog/layout.html.twig" %}
 
-{% block title %}{{ 'post.by.author' | trans({'%name%': author.name}) }}{% endblock %}
+{% block title %}
+    {{ 'post.by.author' | trans({'%name%': author.name}) }}
+{% endblock %}
 
 {% block section %}
 
@@ -10,12 +12,11 @@
         <p>{{ 'author.empty.posts' | trans }}</p>
     {% endfor %}
 
-
 {% endblock %}
 
 {% block sidebar %}
 
-    <div class="blog-post">
+    <div class="col-sm-4 blog-post">
         <h2 class="blog-post-title">{{ 'post.by' | trans }}</h2>
         <p class="blog-post-meta">
             {{ author.name }}

@@ -29,7 +29,9 @@
             <h4>{{ 'post.latest' | trans }}</h4>
             <ol class="list-unstyled">
                 {% for post in latest %}
-                    <li><a href="#">{{ post.title }}</a></li>
+                    <li>
+                        <a href="{{ path("msbios_blog_post_show", {slug: post.slug}) }}">{{ post.title }}</a>
+                    </li>
                 {% endfor %}
             </ol>
         </div>
