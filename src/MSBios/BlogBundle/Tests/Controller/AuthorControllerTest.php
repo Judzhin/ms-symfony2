@@ -30,10 +30,10 @@ class AuthorControllerTest extends WebTestCase
             ->getRepository(Author::class)
             ->findFirst();
 
+        $this->assertTrue($client->getResponse()->isSuccessful(), 'The response was not succesful');
+
         /** @var Crawler $crawler */
         $crawler = $client->request('GET', '/author/'.$author->getSlug());
-
-        $this->assertTrue($client->getResponse()->isSuccessful(), 'The response was not succesful');
 
         /** @var int $postsCount */
         $postsCount = $author->getPosts();
