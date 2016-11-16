@@ -5,7 +5,7 @@
  */
 namespace MSBios\BlogBundle\Controller;
 
-
+use MSBios\ModelBundle\Entity\Post;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,7 +25,6 @@ class PostController extends Controller
     public function indexAction()
     {
         $repository = $this->getDoctrine()->getRepository(Post::class);
-
         return ['posts' => $repository->findAll(), 'latest' => $repository->findLatest(3),];
     }
 

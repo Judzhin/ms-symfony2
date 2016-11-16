@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit colors="true">
+    <php>
+        <server name="KERNEL_DIR" value="./app" />
+    </php>
     <testsuites>
         <testsuite name="Symfony 2 Learn Test Suite">
             <directory>./src/MSBios/Tests</directory>

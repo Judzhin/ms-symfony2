@@ -1,19 +1,11 @@
 home: Home
 
 by: by
-<<<<<<< HEAD
-read.more: read.more
-
-post:
-  plural: Posts
-  on: on
-=======
 read.more: Read more
 
 post:
   plural: Posts
   latest: Latest posts
-<<<<<<< HEAD
   on: Posted on
   by: Post by
   by.author: Post by %name%
@@ -25,7 +17,3 @@ comment:
 author:
   title: Author
   empty.posts: This author did not write any post yet.
-=======
-  on: Postend on
->>>>>>> 46e484be86cbd4fb1f47cf78f48a16192611bbb6
->>>>>>> 4939439057aee307f0bec7226ed0a84fdc1fab00

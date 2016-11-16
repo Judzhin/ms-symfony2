@@ -23,7 +23,18 @@ class PostControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
         $this->assertTrue($client->getResponse()->isSuccessful(), 'The response was not successful');
-        $this->assertCount(3, $crawler->filter('h2'), 'There should be 3 displayed posts');
+
+        /** @var array $posts */
+        $posts = $client->getContainer()
+            ->get('doctrine')
+            ->getManager()
+            ->getRepository(Post::class)
+            ->findAll();
+
+        /** @var int $countPosts */
+        $countPosts = count($posts);
+
+        $this->assertCount($countPosts, $crawler->filter('h2'), "There should be {$countPosts} displayed posts");
     }
 
     public function testShow()
@@ -41,9 +52,7 @@ class PostControllerTest extends WebTestCase
         /** @var  $crawler */
         $crawler = $client->request('GET', '/'.$post->getSlug());
         $this->assertTrue($client->getResponse()->isSuccessful(), 'The response was not successful');
-
-        $this->assertCount(9, $crawler->filter('h2'), 'There should be 3 displayed posts');
-        $this->assertEquals($post->getTitle(), $crawler->filter('h1')->text(), 'Invalid post title');
-        $this->assertGreaterThanOrEqual(1, $crawler->filter('article.comment')->count(), 'There should be at least');
+        $this->assertEquals($post->getTitle(), $crawler->filter('.blog-post-title')->text(), 'Invalid post title');
+        $this->assertGreaterThanOrEqual(count($post->getComments()), $crawler->filter('.media-body')->count(), 'There should be at least');
     }
 }

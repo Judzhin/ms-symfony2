@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-<article>
-    <header>
-        <h2><a href="#">{{ post.title }}</a></h2>
-
-        <p>
-            {{ 'post.on' | trans }}
-            <time datetime="{{ post.createdAt | date('c') }}">{{ post.createdAt | date }}</time>
-            {{ 'by' | trans }} <a href="#">{{ post.author.name }}</a>
-        </p>
-    </header>
-
-    <p>
-        {{ post.description | truncate(400) }} &#8212; <a href="#">{{ 'read.more' | trans }}</a>
-    </p>
-</article>
-=======
 <div class="blog-post">
     <h2 class="blog-post-title">
         <a href="{{ path('msbios_blog_post_show', {slug: post.slug}) }}">{{ post.title }}</a>
@@ -30,13 +13,7 @@
         </a>
     </p>
 
-<<<<<<< HEAD
     <p>{{ post.description | truncate(400) }} &#8212
         <a href="{{ path('msbios_blog_post_show', {slug: post.slug}) }}">{{ 'read.more' | trans }} &raquo;</a>
     </p>
 </div><!-- /.blog-post -->
-=======
-    <p>{{ post.description | truncate(400) }} &#8212 <a href="{{ path('msbios_blog_post_show', {slug: post.slug}) }}">{{ 'read.more' | trans }} &raquo;</a></p>
-</div><!-- /.blog-post -->
->>>>>>> 46e484be86cbd4fb1f47cf78f48a16192611bbb6
->>>>>>> 4939439057aee307f0bec7226ed0a84fdc1fab00

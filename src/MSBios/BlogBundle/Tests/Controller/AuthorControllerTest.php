@@ -30,13 +30,13 @@ class AuthorControllerTest extends WebTestCase
             ->getRepository(Author::class)
             ->findFirst();
 
+        /** @var Crawler $crawler */
+        $crawler = $client->request('GET', "/author/{$author->getSlug()}");
+
         $this->assertTrue($client->getResponse()->isSuccessful(), 'The response was not succesful');
 
-        /** @var Crawler $crawler */
-        $crawler = $client->request('GET', '/author/'.$author->getSlug());
-
         /** @var int $postsCount */
-        $postsCount = $author->getPosts();
-        $this->assertCount($postsCount, $crawler->filter('h2'), "There should be {$postsCount} posts");
+        $postsCount = count($author->getPosts());
+        $this->assertCount($postsCount, $crawler->filter('h2.blog-post-title'), "{$author->getSlug()} There should be {$postsCount} posts");
     }
 }
