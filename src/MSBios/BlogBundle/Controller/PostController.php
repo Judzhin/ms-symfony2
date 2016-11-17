@@ -5,12 +5,16 @@
  */
 namespace MSBios\BlogBundle\Controller;
 
+use Doctrine\Common\Util\Debug;
+use Doctrine\ORM\EntityManager;
+use MSBios\ModelBundle\Entity\Comment;
 use MSBios\ModelBundle\Entity\Post;
 use MSBios\ModelBundle\Form\CommentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -63,6 +67,39 @@ class PostController extends Controller
      */
     public function createCommentAction(Request $request, $slug)
     {
-        return [];
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine();
+
+        /** @var Post $post */
+        $post = $em->getRepository(Post::class)->findOneBy(
+            [
+                'slug' => $slug,
+            ]
+        );
+
+        if (!$post) {
+            throw $this->createNotFoundException('Post was not found');
+        }
+
+        /** @var Comment $comment */
+        $comment = new Comment;
+        $comment->setPost($post);
+
+        /** @var Form $form */
+        $form = $this->createForm(new CommentType, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em->persist($comment);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'Your comment was submitted succesfully');
+            $this->redirect($this->generateUrl('msbios_blog_post_show', ['slug' => $post->getSlug()]));
+        }
+
+        return [
+            'post' => $post,
+            'form' => $form->createView(),
+        ];
     }
 }

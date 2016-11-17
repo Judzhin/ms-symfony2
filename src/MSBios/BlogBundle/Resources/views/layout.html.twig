@@ -41,6 +41,12 @@
 
             <div class="col-sm-8 blog-main">
 
+                {% for type, messages in app.session.flashbag.all() %}
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                {% endfor %}
+
                 {% block section %}{% endblock %}
 
             </div><!-- /.blog-main -->

@@ -27,7 +27,7 @@ class CommentType extends AbstractType
         $builder
             ->add('authorName', null, ['label' => 'name'])
             ->add('message', null, ['label' => 'comment.singular'])
-            ->add('post', 'submit', ['label' => 'send']);
+            ->add('send', 'submit', ['label' => 'send']);
     }
 
     /**
