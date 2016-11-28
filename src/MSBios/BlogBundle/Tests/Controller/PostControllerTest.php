@@ -18,7 +18,7 @@ use Symfony\Component\DomCrawler\Crawler;
 class PostControllerTest extends WebTestCase
 {
     /**
-     *
+     * @test
      */
     public function testIndex()
     {
@@ -39,6 +39,9 @@ class PostControllerTest extends WebTestCase
         $this->assertCount($countPosts, $crawler->filter('h2'), "There should be {$countPosts} displayed posts");
     }
 
+    /**
+     * @test
+     */
     public function testShow()
     {
         /** @var Clie $client */
@@ -62,6 +65,9 @@ class PostControllerTest extends WebTestCase
         );
     }
 
+    /**
+     * @test
+     */
     public function testCreateComment()
     {
         /** @var Client $client */
@@ -83,8 +89,8 @@ class PostControllerTest extends WebTestCase
 
         $form = $buttonCrawlerNode->form(
             [
-                'blog_modelbundle_comment[authorName]' => 'A hunble commenter',
-                'blog_modelbundle_comment[message]' => "Hi! I`m commenting about Symfony2!",
+                'msbios_modelbundle_comment[authorName]' => 'A hunble commenter',
+                'msbios_modelbundle_comment[message]' => "Hi! I`m commenting about Symfony2!",
             ]
         );
 

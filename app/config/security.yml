@@ -15,7 +15,7 @@ security:
         in_memory:
             memory:
                 users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    # user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     # the main part of the security, where you can set up firewalls
@@ -26,24 +26,42 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
         # the login page has to be accessible for everybody
-        demo_login:
-            pattern:  ^/demo/secured/login$
+        # demo_login:
+        #     pattern:  ^/demo/secured/login$
+        #     security: false
+
+        admin_login:
+            pattern:  ^/admin/login$
             security: false
 
         # secures part of the application
-        demo_secured_area:
-            pattern:    ^/demo/secured/
+        # demo_secured_area:
+        #     pattern:    ^/demo/secured/
+        #     # it's important to notice that in this case _demo_security_check and _demo_login
+        #     # are route names and that they are specified in the AcmeDemoBundle
+        #     form_login:
+        #         check_path: _demo_security_check
+        #         login_path: _demo_login
+        #     logout:
+        #         path:   _demo_logout
+        #         target: _demo
+        #     #anonymous: ~
+        #     #http_basic:
+        #     #    realm: "Secured Demo Area"
+
+        admin_secured_area:
+            pattern: ^/admin/
             # it's important to notice that in this case _demo_security_check and _demo_login
             # are route names and that they are specified in the AcmeDemoBundle
             form_login:
                 check_path: _demo_security_check
                 login_path: _demo_login
             logout:
-                path:   _demo_logout
+                path: _demo_logout
                 target: _demo
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
+            anonymous: ~
+            http_basic:
+                realm: "Secured Demo Area"
 
     # with these settings you can restrict or allow access for different parts
     # of your application based on roles, ip, host or methods

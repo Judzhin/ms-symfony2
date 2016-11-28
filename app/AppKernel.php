@@ -29,9 +29,10 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new MSBios\BlogBundle\BlogBundle(),
-            new MSBios\ModelBundle\ModelBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle,
+            new MSBios\ModelBundle\ModelBundle(),
+            new MSBios\BlogBundle\BlogBundle(),
+            new MSBios\AdminBundle\AdminBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {

@@ -5,11 +5,11 @@
  */
 namespace MSBios\BlogBundle\Controller;
 
-use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\EntityManager;
 use MSBios\ModelBundle\Entity\Comment;
 use MSBios\ModelBundle\Entity\Post;
 use MSBios\ModelBundle\Form\CommentType;
+use MSBios\ModelBundle\Repository\PostRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -25,26 +25,37 @@ class PostController extends Controller
 {
     /**
      * @return array
+     *
      * @Route("/")
      * @Template()
-     * @return array
      */
     public function indexAction()
     {
-        $repository = $this->getDoctrine()->getRepository(Post::class);
+        /** @var PostRepository $repository */
+        $repository = $this->getDoctrine()
+            ->getRepository(Post::class);
 
-        return ['posts' => $repository->findAll(), 'latest' => $repository->findLatest(3),];
+        return [
+            'posts' => $repository->findAll(),
+            'latest' => $repository->findLatest(3)
+        ];
     }
 
     /**
      * @param $slug
+     * @return array
+     *
      * @Route("/{slug}")
      * @Template()
      */
     public function showAction($slug)
     {
         /** @var Post $post */
-        $post = $this->getDoctrine()->getRepository(Post::class)->findOneBy(['slug' => $slug]);
+        $post = $this->getDoctrine()
+            ->getRepository(Post::class)
+            ->findOneBy([
+                'slug' => $slug
+            ]);
 
         if (is_null($post)) {
             throw $this->createNotFoundException('Post was not found');
@@ -52,14 +63,15 @@ class PostController extends Controller
 
         return [
             'post' => $post,
-            'form' => $this->createForm(new CommentType)->createView(),
+            'form' => $this->createForm(new CommentType)
+                ->createView(),
         ];
     }
 
     /**
      * @param Request $request
      * @param $slug
-     * @return array
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Route("/{slug}/create-comment")
      * @Method("POST")
@@ -104,7 +116,7 @@ class PostController extends Controller
 
         return [
             'post' => $post,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ];
     }
 }
