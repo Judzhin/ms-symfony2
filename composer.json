@@ -22,7 +22,6 @@
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "phpunit/phpunit": "^4.8",
         "gedmo/doctrine-extensions": "^2.4"
     },
     "require-dev": {

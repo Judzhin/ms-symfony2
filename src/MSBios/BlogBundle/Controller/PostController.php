@@ -68,14 +68,14 @@ class PostController extends Controller
     public function createCommentAction(Request $request, $slug)
     {
         /** @var EntityManager $em */
-        $em = $this->getDoctrine();
+        $em = $this->getDoctrine()
+            ->getManager();
 
         /** @var Post $post */
-        $post = $em->getRepository(Post::class)->findOneBy(
-            [
+        $post = $em->getRepository(Post::class)
+            ->findOneBy([
                 'slug' => $slug,
-            ]
-        );
+            ]);
 
         if (!$post) {
             throw $this->createNotFoundException('Post was not found');
@@ -93,8 +93,13 @@ class PostController extends Controller
             $em->persist($comment);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'Your comment was submitted succesfully');
-            $this->redirect($this->generateUrl('msbios_blog_post_show', ['slug' => $post->getSlug()]));
+            $this->get('session')
+                ->getFlashBag()
+                ->add('success', 'Your comment was submitted succesfully');
+
+            return $this->redirect(
+                $this->generateUrl('msbios_blog_post_show', ['slug' => $post->getSlug()])
+            );
         }
 
         return [

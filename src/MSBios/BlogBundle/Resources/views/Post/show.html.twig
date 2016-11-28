@@ -41,8 +41,6 @@
 
     <h4>{{ 'comment.write' | trans }}</h4>
 
-    {{ form(form, {action: path('msbios_blog_post_createcomment', {slug: post.slug})}) }}
-
     {{ form_start(form, {
         attr: {class:'form-horizontal'},
         action: path("msbios_blog_post_createcomment", { slug: post.slug }) ~ '#comments'
