@@ -1,0 +1,44 @@
+{% extends "@Admin/admin.html.twig" %}
+
+{% block stylesheets %}
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('bundles/admin/assets/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/admin/assets/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/admin/assets/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/admin/assets/css/style.css') }}" rel="stylesheet">
+
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Mainly scripts -->
+    <script src="{{ asset('bundles/admin/assets/js/jquery-2.1.1.js') }}"></script>
+    <script src="{{ asset('bundles/admin/assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/admin/assets/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+    <script src="{{ asset('bundles/admin/assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+
+    <!-- Peity -->
+    <script src="{{ asset('bundles/admin/assets/js/plugins/peity/jquery.peity.min.js') }}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="{{ asset('bundles/admin/assets/js/inspinia.js') }}"></script>
+    <script src="{{ asset('bundles/admin/assets/js/plugins/pace/pace.min.js') }}"></script>
+
+    <!-- iCheck -->
+    <script src="{{ asset('bundles/admin/assets/js/plugins/iCheck/icheck.min.js') }}"></script>
+
+    <!-- Peity -->
+    <script src="{{ asset('bundles/admin/assets/js/demo/peity-demo.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+{% endblock %}

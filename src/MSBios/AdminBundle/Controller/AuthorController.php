@@ -1,7 +1,14 @@
 <?php
-
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
 namespace MSBios\AdminBundle\Controller;
 
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityManager;
+use MSBios\ModelBundle\Repository\AuthorRepository;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -18,6 +25,15 @@ use MSBios\ModelBundle\Form\AuthorType;
 class AuthorController extends Controller
 {
     /**
+     * @return ObjectRepository|AuthorRepository
+     */
+    private function getRepository() {
+        return $this->getDoctrine()
+            ->getManager()
+            ->getRepository(Author::class);
+    }
+
+    /**
      * Lists all Author entities.
      *
      * @return array
@@ -28,12 +44,9 @@ class AuthorController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('ModelBundle:Author')->findAll();
-
         return [
-            'entities' => $entities,
+            'entities' => $this->getRepository()
+                ->findAll(),
         ];
     }
 
@@ -49,38 +62,47 @@ class AuthorController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Author();
+        /** @var Author $entity */
+        $entity = new Author;
+
+        /** @var Form $form */
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            /** @var EntityManager $em */
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('author_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl(
+                'msbios_admin_author_show', [
+                    'id' => $entity->getId()
+            ]));
         }
 
-        return array(
+        return [
             'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+            'form' => $form->createView(),
+        ];
     }
 
     /**
      * Creates a form to create a Author entity.
-
      * @param Author $entity
      * @return \Symfony\Component\Form\Form
      */
     private function createCreateForm(Author $entity)
     {
-        $form = $this->createForm(new AuthorType(), $entity, array(
-            'action' => $this->generateUrl('author_create'),
+        /** @var Form $form */
+        $form = $this->createForm(new AuthorType, $entity, array(
+            'action' => $this->generateUrl('msbios_admin_author_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', [
+            'label' => 'Create'
+        ]);
 
         return $form;
     }
@@ -96,13 +118,16 @@ class AuthorController extends Controller
      */
     public function newAction()
     {
-        $entity = new Author();
-        $form   = $this->createCreateForm($entity);
+        /** @var Author $entity */
+        $entity = new Author;
 
-        return array(
+        /** @var Form $form */
+        $form = $this->createCreateForm($entity);
+
+        return [
             'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+            'form' => $form->createView(),
+        ];
     }
 
     /**
@@ -117,20 +142,21 @@ class AuthorController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('ModelBundle:Author')->find($id);
+        /** @var Author $entity */
+        $entity = $this->getRepository()
+            ->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Author entity.');
         }
 
+        /** @var Form $deleteForm */
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
+        return [
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
-        );
+        ];
     }
 
     /**
@@ -145,22 +171,25 @@ class AuthorController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('ModelBundle:Author')->find($id);
+        /** @var Author $entity */
+        $entity = $this->getRepository()
+            ->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Author entity.');
         }
 
+        /** @var Form $editForm */
         $editForm = $this->createEditForm($entity);
+
+        /** @var Form $deleteForm */
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+        return [
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ];
     }
 
     /**
@@ -171,12 +200,14 @@ class AuthorController extends Controller
      */
     private function createEditForm(Author $entity)
     {
-        $form = $this->createForm(new AuthorType(), $entity, array(
-            'action' => $this->generateUrl('author_update', array('id' => $entity->getId())),
+        /** @var Form $form */
+        $form = $this->createForm(new AuthorType, $entity, [
+            'action' => $this->generateUrl(
+                'msbios_admin_author_update', ['id' => $entity->getId()]),
             'method' => 'PUT',
-        ));
+        ]);
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', ['label' => 'Update']);
 
         return $form;
     }
@@ -188,15 +219,15 @@ class AuthorController extends Controller
      * @param $id
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Route("/{id}", name="author_update")
+     * @Route("/{id}")
      * @Method("PUT")
      * @Template("AdminBundle:Author:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('ModelBundle:Author')->find($id);
+        /** @var Author $entity */
+        $entity = $this->getRepository()
+            ->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Author entity.');
@@ -207,16 +238,20 @@ class AuthorController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            /** @var EntityManager $em */
+            $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->redirect($this->generateUrl('author_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl(
+                'msbios_admin_author_edit', ['id' => $id])
+            );
         }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+        return [
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ];
     }
 
     /**
@@ -231,17 +266,19 @@ class AuthorController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        /** @var Form $form */
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ModelBundle:Author')->find($id);
+            $entity = $this->getRepository()->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Author entity.');
             }
 
+            /** @var EntityManager $em */
+            $em = $this->getDoctrine()->getManager();
             $em->remove($entity);
             $em->flush();
         }
@@ -262,10 +299,9 @@ class AuthorController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('author_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('msbios_admin_author_delete', ['id' => $id]))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->add('submit', 'submit', ['label' => 'Delete'])
+            ->getForm();
     }
 }

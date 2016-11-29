@@ -1,43 +1,96 @@
-{% extends '::base.html.twig' %}
+{% extends '@Admin/layout.html.twig' %}
+
+{% block breadcrumb %}
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Author list</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/admin">Dashboard</a>
+                </li>
+                <li class="active">
+                    <strong>Authors</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+{% endblock %}
 
 {% block body -%}
-    <h1>Author list</h1>
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Slug</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('author_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
-                <td>{{ entity.slug }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('author_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('author_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Author list</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
 
-        <ul>
-        <li>
-            <a href="{{ path('author_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+                    <a href="{{ path('msbios_admin_author_new') }}"
+                       class="btn btn-primary">
+                        Create a new entry
+                    </a>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Slug</th>
+                            <th class="no-link last text-right">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for entity in entities %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('msbios_admin_author_show', { 'id': entity.id }) }}">{{ entity.id }}</a>
+                                </td>
+                                <td>{{ entity.name }}</td>
+                                <td>{{ entity.slug }}</td>
+                                <td class="text-right">
+                                    <a href="{{ path('msbios_admin_author_show', { 'id': entity.id }) }}"
+                                       class="btn btn-success btn-xs">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{{ path('msbios_admin_author_edit', { 'id': entity.id }) }}"
+                                       class="btn btn-primary btn-xs">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
