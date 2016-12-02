@@ -11,6 +11,7 @@ use MSBios\ModelBundle\Entity\Post;
 use MSBios\ModelBundle\Form\CommentType;
 use MSBios\ModelBundle\Repository\PostRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -42,17 +43,27 @@ class PostController extends Controller
     }
 
     /**
-     * @param $slug
+     * -param $slug
+     * @param Post $post
      * @return array
      *
      * @Route("/{slug}")
+     * -ParamConverter("post", class="ModelBundle:Post", options={"slug"="slug"})
+     * @ParamConverter("post", class="MSBios\ModelBundle\Entity\Post", options={"slug"="slug"})
      * @Template()
      */
-    public function showAction($slug)
+    // public function showAction($slug)
+    public function showAction(Post $post = null)
     {
-        if (!($post = $this->getDoctrine()
-            ->getRepository(Post::class)
-            ->findOneBySlug($slug))) {
+        // Example 1
+        // if (!($post = $this->getDoctrine()
+        //     ->getRepository(Post::class)
+        //     ->findOneBySlug($slug))) {
+        //     throw $this->createNotFoundException('Post was not found');
+        // }
+
+        // Example 2
+        if (!$post) {
             throw $this->createNotFoundException('Post was not found');
         }
 
