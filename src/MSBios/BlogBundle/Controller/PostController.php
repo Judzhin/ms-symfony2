@@ -50,14 +50,9 @@ class PostController extends Controller
      */
     public function showAction($slug)
     {
-        /** @var Post $post */
-        $post = $this->getDoctrine()
+        if (!($post = $this->getDoctrine()
             ->getRepository(Post::class)
-            ->findOneBy([
-                'slug' => $slug
-            ]);
-
-        if (is_null($post)) {
+            ->findOneBySlug($slug))) {
             throw $this->createNotFoundException('Post was not found');
         }
 
@@ -85,9 +80,7 @@ class PostController extends Controller
 
         /** @var Post $post */
         $post = $em->getRepository(Post::class)
-            ->findOneBy([
-                'slug' => $slug,
-            ]);
+            ->findOneSlug($slug);
 
         if (!$post) {
             throw $this->createNotFoundException('Post was not found');
@@ -110,7 +103,7 @@ class PostController extends Controller
                 ->add('success', 'Your comment was submitted succesfully');
 
             return $this->redirect(
-                $this->generateUrl('msbios_blog_post_show', ['slug' => $post->getSlug()])
+                $this->generateUrl('msbios_blog_post_show', ['slug' => $slug])
             );
         }
 

@@ -1,11 +1,14 @@
 <?php
 
-namespace MSBios\ModelBundle\Tests\Controller;
+namespace MSBios\AdminBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AuthorControllerTest extends WebTestCase
 {
+    public function testAction() {
+        $this->assertTrue(true);
+    }
     /*
     public function testCompleteScenario()
     {

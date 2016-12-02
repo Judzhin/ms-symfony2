@@ -1,16 +1,76 @@
-{% extends '::base.html.twig' %}
+{% extends '@Admin/layout.html.twig' %}
 
-{% block body -%}
-    <h1>Author edit</h1>
+{% block breadcrumb %}
 
-    {{ form(edit_form) }}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{{ entity.name }}</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/admin">Dashboard</a>
+                </li>
+                <li>
+                    <a href="/admin">Author list</a>
+                </li>
+                <li class="active">
+                    <strong>{{ entity.name }}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('author') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content -%}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Author <small>edit data</small></h5>
+                </div>
+                <div class="ibox-content">
+
+                    {{ form_start(edit_form, {attr: {class: "form-horizontal"}}) }}
+
+                        <div class="form-group">
+                            {{ form_label(edit_form.name, null, {label_attr: {class: 'col-sm-2 control-label'}}) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(edit_form.name, {attr: {class:"form-control"}}) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(edit_form.slug, null, {label_attr: {class: 'col-sm-2 control-label'}}) }}
+                            <div class="col-sm-10">
+                                {{ form_widget(edit_form.slug, {attr: {class:"form-control"}}) }}
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <a href="{{ path('msbios_admin_author_index') }}"
+                                   class="btn btn-white">
+                                    Back to the list
+                                </a>
+                                {{ form_widget(edit_form.submit) }}
+                            </div>
+                        </div>
+
+                    {{ form_end(edit_form, {render_rest: false}) }}
+
+                    {{ form(delete_form) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
