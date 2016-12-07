@@ -1,13 +1,19 @@
 <?php
-
+/**
+ * @access protected
+ * @author Judzhin Miles <info[woof-woof]msbios.com>
+ */
 namespace MSBios\ModelBundle\Form;
 
-use MSBios\ModelBundle\Entity\Author;
 use MSBios\ModelBundle\Entity\Post;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * Class PostType
+ * @package MSBios\ModelBundle\Form
+ */
 class PostType extends AbstractType
 {
     /**
