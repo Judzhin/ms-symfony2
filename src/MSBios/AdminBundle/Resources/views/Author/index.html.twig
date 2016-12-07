@@ -14,7 +14,7 @@
             <h2>Author list</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="/">Home</a>
+                    <a href="{{ path('msbios_blog_post_index') }}">Home</a>
                 </li>
                 <li>
                     <a href="/admin">Dashboard</a>
@@ -52,6 +52,8 @@
                             <th>Id</th>
                             <th>Name</th>
                             <th>Slug</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
                             <th class="no-link last text-right">Actions</th>
                         </tr>
                         </thead>
@@ -63,6 +65,8 @@
                                 </td>
                                 <td>{{ entity.name }}</td>
                                 <td>{{ entity.slug }}</td>
+                                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+                                <td>{{ entity.updatedAt|date('Y-m-d H:i:s') }}</td>
                                 <td class="text-right">
                                     <a href="{{ path('msbios_admin_author_show', { 'id': entity.id }) }}"
                                        class="btn btn-success btn-xs">

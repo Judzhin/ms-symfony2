@@ -6,18 +6,18 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AuthorControllerTest extends WebTestCase
 {
-    public function testAction() {
-        $this->assertTrue(true);
-    }
-    /*
+
     public function testCompleteScenario()
     {
         // Create a new client to browse the application
-        $client = static::createClient();
+        $client = static::createClient([], [
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW' => 'admin'
+        ]);
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/author/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /author/");
+        $crawler = $client->request('GET', '/admin/author/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /admin/author/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
@@ -35,10 +35,10 @@ class AuthorControllerTest extends WebTestCase
         // Edit the entity
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
-        $form = $crawler->selectButton('Update')->form(array(
+        $form = $crawler->selectButton('Update')->form([
             'msbios_modelbundle_author[field_name]'  => 'Foo',
             // ... other fields to fill
-        ));
+        ]);
 
         $client->submit($form);
         $crawler = $client->followRedirect();
@@ -53,6 +53,4 @@ class AuthorControllerTest extends WebTestCase
         // Check the entity has been delete on the list
         $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
     }
-
-    */
 }

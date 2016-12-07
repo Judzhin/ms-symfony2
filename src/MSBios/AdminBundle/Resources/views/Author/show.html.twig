@@ -7,13 +7,13 @@
             <h2>{{ entity.name }}</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="/">Home</a>
+                    <a href="{{ path('msbios_blog_post_index') }}">Home</a>
                 </li>
                 <li>
                     <a href="/admin">Dashboard</a>
                 </li>
                 <li>
-                    <a href="/admin">Author list</a>
+                    <a href="{{ path('msbios_admin_author_index') }}">Author list</a>
                 </li>
                 <li class="active">
                     <strong>{{ entity.name }}</strong>
@@ -64,15 +64,16 @@
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
-                                <a href="{{ path('msbios_admin_author_index') }}"
-                                   class="btn btn-white">
-                                    Back to the list
-                                </a>
-                                <a href="{{ path('msbios_admin_author_edit', { 'id': entity.id }) }}"
-                                   class="btn btn-white">
-                                    Edit
-                                </a>
-                                {{ form(delete_form) }}
+                                {{ form_start(delete_form) }}
+                                    <a href="{{ path('msbios_admin_author_index') }}"
+                                       class="btn btn-link">Back to the list
+                                    </a>
+                                    <a href="{{ path('msbios_admin_author_edit', { 'id': entity.id }) }}"
+                                       class="btn btn-link">Edit
+                                    </a>
+                                    {{ form_widget(delete_form.submit, {attr: {class: 'btn btn-white'}}) }}
+                                {{ form_end(delete_form) }}
+
                             </div>
                         </div>
                     </div>

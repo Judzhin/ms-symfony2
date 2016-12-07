@@ -48,7 +48,7 @@ class PostController extends Controller
      * @return array
      *
      * @Route("/{slug}")
-     * -ParamConverter("post", class="ModelBundle:Post", options={"slug"="slug"})
+     * - ParamConverter("post", class="ModelBundle:Post", options={"slug"="slug"})
      * @ParamConverter("post", class="MSBios\ModelBundle\Entity\Post", options={"slug"="slug"})
      * @Template()
      */

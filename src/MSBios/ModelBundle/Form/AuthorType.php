@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class AuthorType extends AbstractType
 {
     /**
+     * {@inheritdoc}
+     *
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -16,7 +18,7 @@ class AuthorType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('slug')
+            // ->add('slug')
         ;
     }
     
